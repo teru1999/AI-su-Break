@@ -1,0 +1,173 @@
+/* <!-- リセットcss -->
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+
+<!-- 通常css -->
+<link rel="stylesheet" href="style.css"> */
+
+
+@charset "UTF-8";
+/* regular */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+/* bold */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+
+body{
+    color: #333333;
+    background: #f6f7f9;
+
+    font-family: 'Note Sans', Regular 400;
+    font-size: large;
+
+    padding-top: 80px;
+}
+
+/* 部品 */
+h2{
+    margin: 7px;
+    padding: 7px;
+}
+h3{
+    margin: 5px;
+    padding: 5px;
+}
+h3{
+    margin: 3px;
+    padding: 3px;
+}
+
+p{
+    margin: 3px;
+    padding: 3px;
+}
+
+button{
+    margin: 10px;
+    padding: 10px;
+
+    border: solid #333 0.5px;
+    border-radius: 5px;
+
+    color: #333;
+    background: #fff;
+}
+
+input{
+    color: #333333;
+    background: #fff;
+
+    margin: 10px;
+    padding: 10px;
+
+    border: solid #333 0.5px;
+    border-radius: 5px;
+}
+
+/* header */
+header{
+    display: flex;
+    justify-content: space-between; /* 両端 */
+
+    width: 100%;
+    height: 70px;
+    
+    margin: 0 auto; /*中央に配置 */
+    padding: 0 2%; /* スマートフォン向け */
+    margin-bottom: 20px;
+
+    color: #fff;
+    background: #333;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    font-size: 1.25rem;
+
+    top: 0; /* 上下の固定位置を上から0pxにする */
+    left: 0; /* 左右の固定位置を左から0pxにする */
+    position: fixed;
+}
+
+/* main */
+main{
+    max-width: 1100px;
+    margin: 0 auto; /* 中央に配置 */
+    padding: 0 4%; /* スマートフォン向け */
+}
+
+/* footer */
+footer{
+    max-width: 1100px;
+    margin: 0 auto; /* 中央に配置 */
+    padding: 0 4%; /* スマートフォン向け */
+    
+    text-align: center;
+    padding: 26px 0;
+
+    width: 80%;
+
+    margin-top: 30px;
+    border-top: solid 1px;
+}
+footer p{
+    color: #333;
+    font-size: 0.875rem;
+}
+/* <footer>
+<p>©Suzuki Hikaru's SmartAnime All Rigths Reserved</p>
+</footer> */
+
+
+/* クラス */
+.column-contents{
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+
+    margin: 10px;
+    padding: 10px;
+}
+.row-contents{
+    display: flex;
+    justify-content:space-around;
+    flex-direction:row;
+
+    margin: 10px;
+    padding: 10px;
+}
+.content{
+    width: 40%;
+    height: auto;
+
+    margin: 5px;
+    padding: 5px;
+}
+
+/* id */
+#card{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    margin: 10px;
+    padding: 10px;
+}
+
+/* レスポンシブデザイン */
+@media(max-width:600px){
+    body{
+        width: 100%;
+    }
+
+    img, p, h{
+        width: 100%;
+    }
+    
+    video{
+        width: 100%;
+        border: solid #333 0.5px;
+    }
+
+    .content{
+        flex-direction: column;
+    }
+
+}

@@ -77,6 +77,6 @@ git push -u origin master
 2. git add .
 3. git commit -m "base"
 4. git branch -M master
-5. git remote add origin url
-6. git remote set-url origin git@github.com:suzuki-hikaru/
+5. git remote add origin git@github.com:suzuki-hikaru/
+6. git remote set-url origin git@github.com:suzuki-hikaru/ （変更したいとき）
 7. git push -u origin master

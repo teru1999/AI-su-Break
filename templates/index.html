@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- リセットcss -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- 通常css -->
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body style="background: url(static/tmp/000001.jpg);">
+    <header>
+        <h1>AIすブレイク</h1>
+    </header>
+
+    <main>
+        <!-- １段目 -->
+        <div class="row-contents">
+            <div class='content' id="card">
+                <h3>相手画面</h3>
+                <img src="static/images/others.jpg" />
+                <div style="display: flex; flex-direction:column; justify-content:center;">
+                    <button>表情読み取り</button>
+
+                </div>
+            </div>
+
+            <div class='column-contents' style="width: 100%;" id="card">
+                <h3>話題推薦</h3>
+                <div class='row-contents'>
+                    <div>
+                        <h4>Twitterトレンド</h4>
+                        <ul>
+                            {% for trend in trends %}
+                            <li>{{trend}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>AIによる推薦</h4>
+                        <li>頻出単語：{{ freq }}</li>
+                        <li>関連単語1：{{ recommend1 }}</li>
+                        <li>関連単語2：{{ recommend2 }}</li>
+                    </div>
+                </div>
+                <div class='row-contents'>
+                    <div>
+                        <h4>感情補助</h4>
+                        <p>ポジ：70％　ネガ30％</p>
+                    </div>
+                    <div>
+                        <h4>盛り上がり度</h4>
+                        <p>89%</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 二段目 -->
+        <div id="card" style="display: flex; flex-direction:column; justify-content:center;">
+            <h3>会話内容</h3>
+            <p>Aさん：test</p>
+            <p>ひかる：test</p>
+            <p>Aさん：test</p>
+        </div>
+
+        <!-- 三段目 -->
+        <div id="card" style="display: flex; flex-direction:column; justify-content:center;">
+            <h3>コントローラ</h3>
+            <form action="/update" method="POST" enctype="multipart/form-data">
+                <button style="display: block;">更新</button>
+            </form>
+            <form action="/startstream" method="POST" enctype="multipart/form-data">
+                <button style="display: block;">開始</button>
+            </form>
+            <form action="/stopstream" method="POST" enctype="multipart/form-data">
+                <button style="display: none;">終了</button>
+            </form>
+        </div>
+
+        <div class="column-contents">
+            <div class='content'>
+            </div>
+            <div class='content'>
+            </div>
+        </div>
+        <div class="row-contents">
+            <div class='content'>
+            </div>
+            <div class='content'>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>©Suzuki Hikaru's base All Rigths Reserved</p>
+    </footer>
+</body>
+
+</html>

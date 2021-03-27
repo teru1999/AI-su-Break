@@ -10,15 +10,11 @@ from google.cloud import speech
 from six.moves import queue
 import datetime
 
-# 書き込むファイルの設定
-d = datetime.datetime.today()
-today = d.strftime("%Y%m%d-%H%M%S")
-fout = codecs.open('rsc/stream{}.txt'.format(today), 'a', 'utf-8')
-
 # マイクの設定
 STREAMING_LIMIT = 240000  # 4 minutes
 SAMPLE_RATE = 16000
 CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
+fout = ''
 
 # fontcolor
 RED = "\033[0;31m"
@@ -179,6 +175,13 @@ def listen_print_loop(responses, stream):
 
 
 def main():
+    # 書き込むファイルの設定
+    # d = datetime.datetime.today()
+    # today = d.strftime("%Y%m%d-%H%M%S")
+    # fout = codecs.open('rsc/{}.txt'.format(today), 'a', 'utf-8')
+    global fout
+    fout = codecs.open('rsc/tmp/talk.txt', 'a', 'utf-8')
+
     client = speech.SpeechClient()
 
     config = speech.RecognitionConfig(
