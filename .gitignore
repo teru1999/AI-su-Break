@@ -1,5 +1,7 @@
-key.json
-requirements.txt
 /rsc/
 /images/
+/dateset/text/
+
+key.json
+requirements.txt
 python_packages/trend.py

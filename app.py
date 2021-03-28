@@ -6,6 +6,10 @@ from static import getimage
 #Flaskオブジェクトの生成
 app = Flask(__name__)
 
+@app.route("/emotion", methods=['GET'])
+def emotion():
+    return render_template("emotion.html")
+
 @app.route("/", methods=['GET'])
 def index():
     filepath = 'rsc/tmp/talk.txt'

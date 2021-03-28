@@ -80,3 +80,9 @@ git push -u origin master
 5. git remote add origin git@github.com:suzuki-hikaru/
 6. git remote set-url origin git@github.com:suzuki-hikaru/ （変更したいとき）
 7. git push -u origin master
+
+## コーパスの入手と展開
+1. mkdir dataset
+2. cd dataset
+3. wget https://www.rondhuit.com/download/ldcc-20140209.tar.gz
+4. tar zxvf ldcc-20140209.tar.gz
