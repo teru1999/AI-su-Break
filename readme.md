@@ -35,13 +35,13 @@ git clone git@github.com:user/AI-su-Break.git
 
 ## エラーが起きたとき
   ### ベータ版が入っていると不具合が起きる！！ uninstallする！
-    ```googleapis-common-protosを取り除いてからapicore を入れる！↓
-    python -m pip install google-cloud-core==1.5.0```
+    googleapis-common-protosを取り除いてからapicore を入れる！↓
+    python -m pip install google-cloud-core==1.5.0
 
   ### portが埋まっているとき
-    ```apt install lsof
+    apt install lsof
     lsof -i :5000
-    kill -9 901```
+    kill -9 901
 
 ## メモ書き
 * python3 -m pip install google-cloud-speech
