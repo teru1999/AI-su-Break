@@ -1,6 +1,10 @@
+# 概要
+機械学習による表情分析と、会話テキスト解析とword2vecを用いた話題提供。
+双方向で効果的なアイスブレイク（コミュニケーション）を支援する。
+
 # 手順
 1. リポジトリのクローン
-git clone git@github.com:user/
+git clone git@github.com:user/AI-su-Break.git
 
 2. 認証用のJSONファイルのアップロード
 
@@ -15,71 +19,28 @@ git clone git@github.com:user/
     * command pronpt
         * set GOOGLE_APPLICATION_CREDENTIALS=key.json
 
-5. python core.py
+5. python app.py
 
 6. 必ず終了！
 
-# エラーが起きたとき
-  ## ベータ版が入っていると不具合が起きる！！ uninstallする！
+## エラーが起きたとき
+  ### ベータ版が入っていると不具合が起きる！！ uninstallする！
     * googleapis-common-protosを取り除いてからapicore を入れる！↓
     * python -m pip install google-cloud-core==1.5.0
 
-  ## portが埋まっているとき
+  ### portが埋まっているとき
     1. apt install lsof
     2. lsof -i :5000
     3. kill -9 901
 
-# メモ書き
-python3 -m pip install google-cloud-speech
-sudo pip install --upgrade google-cloud-speech
-sudo pip install --upgrade google-cloud
+## メモ書き
+* python3 -m pip install google-cloud-speech
+* sudo pip install --upgrade google-cloud-speech
+* sudo pip install --upgrade google-cloud
 
-# pyaudio
-sudo apt-get install portaudio19-dev python-all-dev
-sudo pip3 install pyaudio
-
-# 環境周り
-## パッケージマネージャーの更新
-sudo apt update
-sudo apt upgrade
-
-## pipのインストール
-sudo apt install python-pip
-pip install --upgrade pip
-
-## (venv)
-pip install virtualenv
-python -m virtualenv venv
-
-## venvのインストール
-sudo apt install python3-venv
-
-## venvの作成とアクティブ化
-python3 -m venv my_venv
-. my_venv/bin/activate
-
-
-# 以下 管理用
-## requirements.txtの取り扱い
-pip list
-pip freeze
-pip freeze > requirements.txt
-
-## 最初にreadmeを作った時
-git fetch
-git merge origin/master
-
-こうするとlocalにReadme.mdがmergeされる。あとは以下のコマンドでpushを再度チャレンジ。
-git push -u origin master
-
-## Git
-1. git init（初回のみ）
-2. git add .
-3. git commit -m "base"
-4. git branch -M master
-5. git remote add origin git@github.com:suzuki-hikaru/
-6. git remote set-url origin git@github.com:suzuki-hikaru/ （変更したいとき）
-7. git push -u origin master
+## pyaudio
+* sudo apt-get install portaudio19-dev python-all-dev
+* sudo pip3 install pyaudio
 
 ## コーパスの入手と展開
 1. mkdir dataset
