@@ -12,6 +12,9 @@
     <!-- 通常css -->
     <link rel="stylesheet" href="../static/css/style.css">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- epoch -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/epoch.min.css') }}">
 </head>
 
 <body style="background: url(static/tmp/000001.jpg);">
@@ -32,12 +35,12 @@
                 </div>
 
                 <div class="container-b">
-                    <div class="btn-toolbar">
+                    <div class="btn-toolbar" style="display: flex; justify-content:space-around; flex-direction:row;">
                         <div class="btn-group">
                             <button class="btn btn-outline-dark" id="start-button">🚀 開始</button>
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-outline-dark" id="predict-button">🤔 感情分析</button>
+                            <button class="btn btn-outline-dark" id="predict-button">🤔 分析</button>
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-outline-dark" id="clear-button">✨ 停止</button>
@@ -55,7 +58,7 @@
                     <div class="output">
                         <ul class="list-unstyled" id="console">
                             <li>①開始ボタンを押してください</li>
-                            <li>②感情分析ボタンを押してください</li>
+                            <li>②分析ボタンを押してください</li>
                         </ul>
                     </div>
                 </div>
@@ -81,56 +84,51 @@
                     </div>
                 </div>
 
-                <div class='row-contents'>
-                    <div>
-                        <h4>盛り上がり度</h4>
-                        <p>89%</p>
+                <div style="display: flex; flex-direction:column; justify-content:center;">
+
+                    <div style="display: flex; flex-direction:row; justify-content:left">
+                        <h3>会話</h3>
+                        <div style="display: flex; flex-direction:row;">
+                            <form action=" /update" method="POST" enctype="multipart/form-data">
+                                <button style="display: block; border-radius: 5px;">更新</button>
+                            </form>
+                            <form action="/startstream" method="POST" enctype="multipart/form-data">
+                                <button style="display: block; border-radius: 5px;">開始</button>
+                            </form>
+                            <form action="/stopstream" method="POST" enctype="multipart/form-data">
+                                <button style="display: block;">終了</button>
+                            </form>
+                        </div>
                     </div>
+
+                    <div id="talk"
+                        style="width:90%; height:300px; padding:30px; margin-top:10px; margin:10px; background-color: rgba(248, 245, 209, 1.0); overflow:hidden; overflow-y:scroll; border-radius: 5px;">
+                        <p>Aさん：test</p>
+                        <p>ひかる：test</p>
+                        <p>Aさん：test</p>
+                        <p>Aさん：test</p>
+                    </div>
+
                 </div>
             </div>
 
         </div>
 
         <!-- 二段目 -->
-        <div class="card" style="display: flex; flex-direction:column; justify-content:center;">
-            <h3>会話内容</h3>
-            <p>Aさん：test</p>
-            <p>ひかる：test</p>
-            <p>Aさん：test</p>
+        <div class='card'>
+            <h3>盛り上がり度</h3>
+            <div id="graph" class="epoch" style="height: 200px;"></div>
         </div>
 
         <!-- 三段目 -->
-        <div class="card" style="display: flex; flex-direction:column; justify-content:center;">
-            <h3>コントローラ</h3>
-            <form action="/update" method="POST" enctype="multipart/form-data">
-                <button style="display: block;">更新</button>
-            </form>
-            <form action="/startstream" method="POST" enctype="multipart/form-data">
-                <button style="display: block;">開始</button>
-            </form>
-            <form action="/stopstream" method="POST" enctype="multipart/form-data">
-                <button style="display: none;">終了</button>
-            </form>
-        </div>
 
-        <div class="column-contents">
-            <div class='content'>
-            </div>
-            <div class='content'>
-            </div>
-        </div>
-        <div class="row-contents">
-            <div class='content'>
-            </div>
-            <div class='content'>
-            </div>
-        </div>
     </main>
 
     <footer>
         <p>©Suzuki Hikaru's base All Rigths Reserved</p>
     </footer>
 
+    <!-- 顔認識 -->
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/tensorflow.min.js"></script>
     <script src="../static/tracking/build/tracking-min.js"></script>
@@ -138,6 +136,45 @@
     <script src="../static/tracking/src/alignment/training/Landmarks.js"></script>
     <script src="../static/tracking/src/alignment/training/Regressor.js"></script>
     <script src="../static/js/predict.js"></script>
+
+    <!-- WebSocket -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/epoch.min.js') }}"></script>
+
+    <script type="text/javascript">
+
+        var ws = new WebSocket("ws://localhost:8000/publish");
+
+        var data = [
+            { label: "Series 1", values: [] },
+            { label: "Series 2", values: [] },
+        ];
+
+        // グラフの設定
+        var lineChart = $('#graph').epoch({
+            type: 'time.line',
+            data: data,
+            axes: ['left', 'right', 'bottom']
+        });
+
+        // グラフで書く
+        ws.onmessage = function (msg) {
+            var current = JSON.parse(msg.data);
+            lineChart.push(current);
+
+            let text = current[0]['y']
+
+            addtalk(1, text)
+        };
+
+        function addtalk(user, talktext) {
+            let p = `<p>${user}：${talktext}</p>`;
+            document.getElementById('talk').insertAdjacentHTML('afterbegin', p);
+        }
+
+    </script>
+
 </body>
 
 </html>

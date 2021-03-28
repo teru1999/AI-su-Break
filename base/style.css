@@ -141,8 +141,7 @@ footer p{
     padding: 5px;
 }
 
-/* id */
-#card{
+.card{
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -150,6 +149,9 @@ footer p{
     margin: 10px;
     padding: 10px;
 }
+
+/* id */
+
 
 /* レスポンシブデザイン */
 @media(max-width:600px){

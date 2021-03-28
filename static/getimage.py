@@ -9,3 +9,6 @@ def main(w):
     print('run')
     crawler = BingImageCrawler(storage={"root_dir": "static/tmp"})
     crawler.crawl(keyword=w, max_num=1)
+
+if __name__ == "__main__":
+    main('犬')

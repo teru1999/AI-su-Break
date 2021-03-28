@@ -1,4 +1,3 @@
-# !/usr/bin/env python
 # coding: utf-8
 
 import re
@@ -11,15 +10,10 @@ from six.moves import queue
 import datetime
 
 # マイクの設定
-STREAMING_LIMIT = 240000  # 4 minutes
+STREAMING_LIMIT = 120000  # 2 minutes
 SAMPLE_RATE = 16000
 CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
 fout = ''
-
-# fontcolor
-RED = "\033[0;31m"
-GREEN = "\033[0;32m"
-YELLOW = "\033[0;33m"
 
 def get_current_time():
     return int(round(time.time() * 1000))
@@ -158,8 +152,11 @@ def listen_print_loop(responses, stream):
             # 標準出力
             sys.stdout.write('\r' + transcript + '\n')
 
+            print('このタイミングでJSに出力')
+
             # ファイル出力
             fout.write(u'{}\n'.format(transcript))
+            fout.close
 
             # ストリームの設定
             stream.is_final_end_time = stream.result_end_time
@@ -175,10 +172,6 @@ def listen_print_loop(responses, stream):
 
 
 def main():
-    # 書き込むファイルの設定
-    # d = datetime.datetime.today()
-    # today = d.strftime("%Y%m%d-%H%M%S")
-    # fout = codecs.open('rsc/{}.txt'.format(today), 'a', 'utf-8')
     global fout
     fout = codecs.open('rsc/tmp/talk.txt', 'a', 'utf-8')
 
@@ -217,6 +210,8 @@ def main():
 
     with mic_manager as stream:
 
+        print(stream.closed)
+
         while not stream.closed:
             stream.audio_input = []
             audio_generator = stream.generator()
@@ -232,6 +227,7 @@ def main():
 
             if stream.result_end_time > 0:
                 stream.final_request_end_time = stream.is_final_end_time
+
             stream.result_end_time = 0
             stream.last_audio_input = []
             stream.last_audio_input = stream.audio_input
@@ -241,6 +237,11 @@ def main():
             if not stream.last_transcript_was_final:
                 sys.stdout.write("\n")
             stream.new_stream = True
+
+def stop():
+    global auth
+    auth = False
+    return
 
 
 if __name__ == "__main__":

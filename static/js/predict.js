@@ -159,3 +159,4 @@ function preprocessImage(image) {
 $("#clear-button").click(async function clasify() {
   location.reload();
 });
+
